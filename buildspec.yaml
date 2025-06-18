@@ -5,13 +5,25 @@ phases:
     runtime-versions:
       php: 8.1
     commands:
-      - echo "[Install] nothing to install"
+      - echo "[Install] Nothing extra to install for plain PHP app"
+
+  pre_build:
+    commands:
+      - echo "[Pre‑Build] $(date)"
+
   build:
     commands:
-      - echo "[Build] nothing to compile"
+      - echo "[Build] No compilation needed"
+
+  post_build:
+    commands:
+      - echo "[Post‑Build] Completed at $(date)"
 
 artifacts:
   files:
-    - '**/*'          # include everything
-  discard-paths: no   # <‑‑ KEEP PATHS so scripts/ stays scripts/
+    - '**/*'
+  discard-paths: yes
+  exclude-paths:
+    - .git/**
+    - php-login-app.zip
 
