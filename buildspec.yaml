@@ -1,15 +1,29 @@
-version: 0.2
+version: 0.2            # required
 
 phases:
   install:
+    runtime-versions:
+      php: 8.1          # pick the PHP version you need
     commands:
-      - echo Installing dependencies...
-      - npm install
+      - echo "[Install] Nothing extra to install for plain PHP app"
+
+  pre_build:
+    commands:
+      - echo "[Pre‑Build] Starting at $(date)"
+
   build:
     commands:
-      - echo Build started on `date`
-      - npm run build
+      - echo "[Build] Zipping source as deployment package"
+      # CodeBuild automatically uploads everything listed in `artifacts`,
+      # but zipping gives you one neat file for CodeDeploy.
+      - zip -r php-login-app.zip .
+
+  post_build:
+    commands:
+      - echo "[Post‑Build] Build completed at $(date)"
+
 artifacts:
   files:
-    - '**/*'
-
+    - php-login-app.zip   # pass the zip file to CodeDeploy
+  base-directory: .       # root of repository
+  discard-paths: yes      # we already zipped; no folder hierarchy needed
