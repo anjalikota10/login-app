@@ -5,21 +5,13 @@ phases:
     runtime-versions:
       php: 8.1
     commands:
-      - echo "[Install] Nothing extra to install for plain PHP app"
-
-  pre_build:
-    commands:
-      - echo "[Pre‑Build] $(date)"
-
+      - echo "[Install] nothing to install"
   build:
     commands:
-      - echo "[Build] Nothing to compile for PHP app"
-
-  post_build:
-    commands:
-      - echo "[Post‑Build] Completed at $(date)"
+      - echo "[Build] nothing to compile"
 
 artifacts:
   files:
-    - '**/*'          # send all repo files to CodeDeploy
-  discard-paths: yes  # they will be flattened one level
+    - '**/*'          # include everything
+  discard-paths: no   # <‑‑ KEEP PATHS so scripts/ stays scripts/
+
