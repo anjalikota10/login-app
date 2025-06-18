@@ -1,5 +1,3 @@
-mkdir -p scripts
-
 cat << 'EOF' > scripts/restart_server.sh
 #!/bin/bash
 echo "Restarting Apache..."
